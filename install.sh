@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Установщик srvdo.
 #
-#   curl -fsSL https://raw.githubusercontent.com/USER/srvdo/main/install.sh | bash
-#   curl -fsSL https://raw.githubusercontent.com/USER/srvdo/main/install.sh | bash -s -- --uninstall
+#   curl -fsSL https://raw.githubusercontent.com/Zelkey17/srvdo/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/Zelkey17/srvdo/main/install.sh | bash -s -- --uninstall
 #   ./install.sh --help
 #
 set -eu
 
 # ── что и откуда ──────────────────────────────────────────────────────────
-REPO=${SRVDO_REPO:-USER/srvdo}          # ← поправьте на своё, если ставите не из клона
+REPO=${SRVDO_REPO:-Zelkey17/srvdo}          # репозиторий уже прописан
 BRANCH=${SRVDO_BRANCH:-main}
 PREFIX=${SRVDO_PREFIX:-${XDG_DATA_HOME:-$HOME/.local/share}/srvdo}
 SHELLS=""                                # пусто → определить самим
@@ -160,7 +160,6 @@ if [ -f "$SELF_DIR/srvdo.sh" ]; then
   say "источник: локальный файл $SRC"
 else
   URL="https://raw.githubusercontent.com/$REPO/$BRANCH/srvdo.sh"
-  case $REPO in USER/*) die "поправьте REPO в install.sh или задайте SRVDO_REPO=ваш-юзер/srvdo" ;; esac
   TMP=$(mktemp); trap 'rm -f "$TMP"' EXIT
   say "источник: $URL"
   if command -v curl >/dev/null 2>&1; then
